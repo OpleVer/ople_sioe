@@ -4,9 +4,9 @@
         .module('opleSioeApp')
         .factory('Peticion', Peticion);
 
-    Peticion.$inject = ['$resource'];
+    Peticion.$inject = ['$resource', 'DateUtils'];
 
-    function Peticion ($resource) {
+    function Peticion ($resource, DateUtils) {
         var resourceUrl =  'api/peticions/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,6 +16,7 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.fecha = DateUtils.convertDateTimeFromServer(data.fecha);
                     }
                     return data;
                 }

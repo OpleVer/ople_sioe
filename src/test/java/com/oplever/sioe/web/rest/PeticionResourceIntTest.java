@@ -24,8 +24,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static com.oplever.sioe.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -66,6 +71,9 @@ public class PeticionResourceIntTest {
 
     private static final String DEFAULT_NOMBRE_RESPONSABLE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE_RESPONSABLE = "BBBBBBBBBB";
+
+    private static final ZonedDateTime DEFAULT_FECHA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_FECHA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private PeticionRepository peticionRepository;
@@ -115,7 +123,8 @@ public class PeticionResourceIntTest {
             .direccion_solicitante(DEFAULT_DIRECCION_SOLICITANTE)
             .acto_certificar(DEFAULT_ACTO_CERTIFICAR)
             .oficio(DEFAULT_OFICIO)
-            .nombre_responsable(DEFAULT_NOMBRE_RESPONSABLE);
+            .nombre_responsable(DEFAULT_NOMBRE_RESPONSABLE)
+            .fecha(DEFAULT_FECHA);
         // Add required entity
         Usuario usuario = UsuarioResourceIntTest.createEntity(em);
         em.persist(usuario);
@@ -158,6 +167,7 @@ public class PeticionResourceIntTest {
         assertThat(testPeticion.getActo_certificar()).isEqualTo(DEFAULT_ACTO_CERTIFICAR);
         assertThat(testPeticion.getOficio()).isEqualTo(DEFAULT_OFICIO);
         assertThat(testPeticion.getNombre_responsable()).isEqualTo(DEFAULT_NOMBRE_RESPONSABLE);
+        assertThat(testPeticion.getFecha()).isEqualTo(DEFAULT_FECHA);
     }
 
     @Test
@@ -343,6 +353,24 @@ public class PeticionResourceIntTest {
 
     @Test
     @Transactional
+    public void checkFechaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = peticionRepository.findAll().size();
+        // set the field null
+        peticion.setFecha(null);
+
+        // Create the Peticion, which fails.
+
+        restPeticionMockMvc.perform(post("/api/peticions")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(peticion)))
+            .andExpect(status().isBadRequest());
+
+        List<Peticion> peticionList = peticionRepository.findAll();
+        assertThat(peticionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPeticions() throws Exception {
         // Initialize the database
         peticionRepository.saveAndFlush(peticion);
@@ -360,7 +388,8 @@ public class PeticionResourceIntTest {
             .andExpect(jsonPath("$.[*].direccion_solicitante").value(hasItem(DEFAULT_DIRECCION_SOLICITANTE.toString())))
             .andExpect(jsonPath("$.[*].acto_certificar").value(hasItem(DEFAULT_ACTO_CERTIFICAR.toString())))
             .andExpect(jsonPath("$.[*].oficio").value(hasItem(DEFAULT_OFICIO.toString())))
-            .andExpect(jsonPath("$.[*].nombre_responsable").value(hasItem(DEFAULT_NOMBRE_RESPONSABLE.toString())));
+            .andExpect(jsonPath("$.[*].nombre_responsable").value(hasItem(DEFAULT_NOMBRE_RESPONSABLE.toString())))
+            .andExpect(jsonPath("$.[*].fecha").value(hasItem(sameInstant(DEFAULT_FECHA))));
     }
 
     @Test
@@ -382,7 +411,8 @@ public class PeticionResourceIntTest {
             .andExpect(jsonPath("$.direccion_solicitante").value(DEFAULT_DIRECCION_SOLICITANTE.toString()))
             .andExpect(jsonPath("$.acto_certificar").value(DEFAULT_ACTO_CERTIFICAR.toString()))
             .andExpect(jsonPath("$.oficio").value(DEFAULT_OFICIO.toString()))
-            .andExpect(jsonPath("$.nombre_responsable").value(DEFAULT_NOMBRE_RESPONSABLE.toString()));
+            .andExpect(jsonPath("$.nombre_responsable").value(DEFAULT_NOMBRE_RESPONSABLE.toString()))
+            .andExpect(jsonPath("$.fecha").value(sameInstant(DEFAULT_FECHA)));
     }
 
     @Test
@@ -412,7 +442,8 @@ public class PeticionResourceIntTest {
             .direccion_solicitante(UPDATED_DIRECCION_SOLICITANTE)
             .acto_certificar(UPDATED_ACTO_CERTIFICAR)
             .oficio(UPDATED_OFICIO)
-            .nombre_responsable(UPDATED_NOMBRE_RESPONSABLE);
+            .nombre_responsable(UPDATED_NOMBRE_RESPONSABLE)
+            .fecha(UPDATED_FECHA);
 
         restPeticionMockMvc.perform(put("/api/peticions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -432,6 +463,7 @@ public class PeticionResourceIntTest {
         assertThat(testPeticion.getActo_certificar()).isEqualTo(UPDATED_ACTO_CERTIFICAR);
         assertThat(testPeticion.getOficio()).isEqualTo(UPDATED_OFICIO);
         assertThat(testPeticion.getNombre_responsable()).isEqualTo(UPDATED_NOMBRE_RESPONSABLE);
+        assertThat(testPeticion.getFecha()).isEqualTo(UPDATED_FECHA);
     }
 
     @Test

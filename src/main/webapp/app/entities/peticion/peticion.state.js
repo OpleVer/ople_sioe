@@ -124,6 +124,7 @@
                                 acto_certificar: null,
                                 oficio: null,
                                 nombre_responsable: null,
+                                fecha: null,
                                 id: null
                             };
                         }

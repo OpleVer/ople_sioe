@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -67,6 +68,10 @@ public class Peticion implements Serializable {
     @NotNull
     @Column(name = "nombre_responsable", nullable = false)
     private String nombre_responsable;
+
+    @NotNull
+    @Column(name = "fecha", nullable = false)
+    private ZonedDateTime fecha;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -214,6 +219,19 @@ public class Peticion implements Serializable {
         this.nombre_responsable = nombre_responsable;
     }
 
+    public ZonedDateTime getFecha() {
+        return fecha;
+    }
+
+    public Peticion fecha(ZonedDateTime fecha) {
+        this.fecha = fecha;
+        return this;
+    }
+
+    public void setFecha(ZonedDateTime fecha) {
+        this.fecha = fecha;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -324,6 +342,7 @@ public class Peticion implements Serializable {
             ", acto_certificar='" + acto_certificar + "'" +
             ", oficio='" + oficio + "'" +
             ", nombre_responsable='" + nombre_responsable + "'" +
+            ", fecha='" + fecha + "'" +
             '}';
     }
 }

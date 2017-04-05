@@ -1,177 +1,156 @@
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myPeticionLabel">Create or edit a Peticion</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myPeticionLabel">Nueva Peticion</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.peticion.id">
+        <!--<div class="form-group" ng-show="vm.peticion.id">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.peticion.id" readonly />
-        </div>
+        </div>-->
         <div class="form-group">
-            <label class="control-label" for="field_numero">Numero</label>
-            <input type="text" class="form-control" name="numero" id="field_numero"
-                    ng-model="vm.peticion.numero"
-                    required ng-maxlength="100"/>
+            <label class="control-label" for="field_numero">Numero Peticion</label>
+            <input type="text" class="form-control" name="numero" id="field_numero" ng-model="vm.peticion.numero" required ng-maxlength="100" />
             <div ng-show="editForm.numero.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.numero.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.numero.$error.required">
+                    Campo Obligatorio
                 </p>
-                <p class="help-block"
-                    ng-show="editForm.numero.$error.maxlength">
+                <p class="help-block" ng-show="editForm.numero.$error.maxlength">
                     This field cannot be longer than 100 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
+            <label for="field_peticionario">Peticionario</label>
+            <select class="form-control" id="field_peticionario" name="peticionario" ng-model="vm.peticion.peticionario" ng-options="peticionario as peticionario.tipo for peticionario in vm.peticionarios track by peticionario.tipo" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.peticionario.$invalid">
+            <p class="help-block" ng-show="editForm.peticionario.$error.required">
+                Campo Obligatorio
+            </p>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="opleSioeApp.peticion.nombre_solicitante" for="field_nombre_solicitante">Nombre Solicitante</label>
-            <input type="text" class="form-control" name="nombre_solicitante" id="field_nombre_solicitante"
-                    ng-model="vm.peticion.nombre_solicitante"
-                    required ng-maxlength="50"/>
+            <input type="text" class="form-control" name="nombre_solicitante" id="field_nombre_solicitante" ng-model="vm.peticion.nombre_solicitante" required ng-maxlength="50" />
             <div ng-show="editForm.nombre_solicitante.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.nombre_solicitante.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.nombre_solicitante.$error.required">
+                    Campo Obligatorio
                 </p>
-                <p class="help-block"
-                    ng-show="editForm.nombre_solicitante.$error.maxlength">
+                <p class="help-block" ng-show="editForm.nombre_solicitante.$error.maxlength">
                     This field cannot be longer than 50 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="opleSioeApp.peticion.paterno_solicitante" for="field_paterno_solicitante">Paterno Solicitante</label>
-            <input type="text" class="form-control" name="paterno_solicitante" id="field_paterno_solicitante"
-                    ng-model="vm.peticion.paterno_solicitante"
-                    required ng-maxlength="50"/>
+            <input type="text" class="form-control" name="paterno_solicitante" id="field_paterno_solicitante" ng-model="vm.peticion.paterno_solicitante" required ng-maxlength="50" />
             <div ng-show="editForm.paterno_solicitante.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.paterno_solicitante.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.paterno_solicitante.$error.required">
+                    Campo Obligatorio
                 </p>
-                <p class="help-block"
-                    ng-show="editForm.paterno_solicitante.$error.maxlength">
+                <p class="help-block" ng-show="editForm.paterno_solicitante.$error.maxlength">
                     This field cannot be longer than 50 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="opleSioeApp.peticion.materno_solicitante" for="field_materno_solicitante">Materno Solicitante</label>
-            <input type="text" class="form-control" name="materno_solicitante" id="field_materno_solicitante"
-                    ng-model="vm.peticion.materno_solicitante"
-                    required ng-maxlength="50"/>
+            <input type="text" class="form-control" name="materno_solicitante" id="field_materno_solicitante" ng-model="vm.peticion.materno_solicitante" required ng-maxlength="50" />
             <div ng-show="editForm.materno_solicitante.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.materno_solicitante.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.materno_solicitante.$error.required">
+                    Campo Obligatorio
                 </p>
-                <p class="help-block"
-                    ng-show="editForm.materno_solicitante.$error.maxlength">
+                <p class="help-block" ng-show="editForm.materno_solicitante.$error.maxlength">
                     This field cannot be longer than 50 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="opleSioeApp.peticion.cargo_solicitante" for="field_cargo_solicitante">Cargo Solicitante</label>
-            <input type="text" class="form-control" name="cargo_solicitante" id="field_cargo_solicitante"
-                    ng-model="vm.peticion.cargo_solicitante"
-                    required ng-maxlength="100"/>
+            <input type="text" class="form-control" name="cargo_solicitante" id="field_cargo_solicitante" ng-model="vm.peticion.cargo_solicitante" required ng-maxlength="100" />
             <div ng-show="editForm.cargo_solicitante.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.cargo_solicitante.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.cargo_solicitante.$error.required">
+                    Campo Obligatorio
                 </p>
-                <p class="help-block"
-                    ng-show="editForm.cargo_solicitante.$error.maxlength">
+                <p class="help-block" ng-show="editForm.cargo_solicitante.$error.maxlength">
                     This field cannot be longer than 100 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="opleSioeApp.peticion.direccion_solicitante" for="field_direccion_solicitante">Direccion Solicitante</label>
-            <input type="text" class="form-control" name="direccion_solicitante" id="field_direccion_solicitante"
-                    ng-model="vm.peticion.direccion_solicitante"
-                    required ng-maxlength="500"/>
+            <input type="text" class="form-control" name="direccion_solicitante" id="field_direccion_solicitante" ng-model="vm.peticion.direccion_solicitante" required ng-maxlength="500" />
             <div ng-show="editForm.direccion_solicitante.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.direccion_solicitante.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.direccion_solicitante.$error.required">
+                    Campo Obligatorio
                 </p>
-                <p class="help-block"
-                    ng-show="editForm.direccion_solicitante.$error.maxlength">
+                <p class="help-block" ng-show="editForm.direccion_solicitante.$error.maxlength">
                     This field cannot be longer than 500 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="opleSioeApp.peticion.acto_certificar" for="field_acto_certificar">Acto Certificar</label>
-            <input type="text" class="form-control" name="acto_certificar" id="field_acto_certificar"
-                    ng-model="vm.peticion.acto_certificar"
-                    required ng-maxlength="2000"/>
+            <input type="text" class="form-control" name="acto_certificar" id="field_acto_certificar" ng-model="vm.peticion.acto_certificar" required ng-maxlength="2000" />
             <div ng-show="editForm.acto_certificar.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.acto_certificar.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.acto_certificar.$error.required">
+                    Campo Obligatorio
                 </p>
-                <p class="help-block"
-                    ng-show="editForm.acto_certificar.$error.maxlength">
+                <p class="help-block" ng-show="editForm.acto_certificar.$error.maxlength">
                     This field cannot be longer than 2000 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_oficio">Oficio</label>
-            <input type="text" class="form-control" name="oficio" id="field_oficio"
-                    ng-model="vm.peticion.oficio"
-                    required/>
+            <input type="text" class="form-control" name="oficio" id="field_oficio" ng-model="vm.peticion.oficio" required/>
             <div ng-show="editForm.oficio.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.oficio.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.oficio.$error.required">
+                    Campo Obligatorio
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="opleSioeApp.peticion.nombre_responsable" for="field_nombre_responsable">Nombre Responsable</label>
-            <input type="text" class="form-control" name="nombre_responsable" id="field_nombre_responsable"
-                    ng-model="vm.peticion.nombre_responsable"
-                    required/>
+            <input type="text" class="form-control" name="nombre_responsable" id="field_nombre_responsable" ng-model="vm.peticion.nombre_responsable" required/>
             <div ng-show="editForm.nombre_responsable.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.nombre_responsable.$error.required">
-                    This field is required.
+                <p class="help-block" ng-show="editForm.nombre_responsable.$error.required">
+                    Campo Obligatorio
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_fecha">Fecha</label>
+            <div class="input-group">
+                <input id="field_fecha" type="text" class="form-control" name="fecha" datetime-picker="{{dateformat}}" ng-model="vm.peticion.fecha" is-open="vm.datePickerOpenStatus.fecha" required/>
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fecha')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+            </div>
+            <div ng-show="editForm.fecha.$invalid">
+                <p class="help-block" ng-show="editForm.fecha.$error.required">
+                    Campo Obligatorio
+                </p>
+                <p class="help-block" ng-show="editForm.fecha.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
                 </p>
             </div>
         </div>
 
         <div class="form-group">
             <label for="field_usuario">Usuario</label>
-            <select class="form-control" id="field_usuario" name="usuario" ng-model="vm.peticion.usuario" ng-options="usuario as usuario.id for usuario in vm.usuarios track by usuario.id" required>
+            <select class="form-control" id="field_usuario" name="usuario" ng-model="vm.peticion.usuario" ng-options="usuario as usuario.nombre for usuario in vm.usuarios track by usuario.nombre" required>
                 <option value=""></option>
             </select>
         </div>
         <div ng-show="editForm.usuario.$invalid">
-            <p class="help-block"
-                ng-show="editForm.usuario.$error.required">
-                This field is required.
-            </p>
-        </div>
-        <div class="form-group">
-            <label for="field_peticionario">Peticionario</label>
-            <select class="form-control" id="field_peticionario" name="peticionario" ng-model="vm.peticion.peticionario" ng-options="peticionario as peticionario.id for peticionario in vm.peticionarios track by peticionario.id" required>
-                <option value=""></option>
-            </select>
-        </div>
-        <div ng-show="editForm.peticionario.$invalid">
-            <p class="help-block"
-                ng-show="editForm.peticionario.$error.required">
-                This field is required.
+            <p class="help-block" ng-show="editForm.usuario.$error.required">
+                Campo Obligatorio
             </p>
         </div>
     </div>
