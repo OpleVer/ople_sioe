@@ -1,10 +1,18 @@
 
+<<<<<<< HEAD
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+=======
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation=>
+>>>>>>> ople_sioe/master
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
+<<<<<<< HEAD
         <h4 class="modal-title" id="myPeticionLabel">Create or edit a Peticion</h4>
+=======
+        <h4 class="modal-title" id="myPeticionLabel">Solicitud</h4>
+>>>>>>> ople_sioe/master
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
@@ -21,7 +29,11 @@
             <div ng-show="editForm.numero.$invalid">
                 <p class="help-block"
                     ng-show="editForm.numero.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.numero.$error.maxlength">
@@ -30,6 +42,33 @@
             </div>
         </div>
         <div class="form-group">
+<<<<<<< HEAD
+=======
+            <label for="field_usuario">Origen</label>
+            <select class="form-control" id="field_usuario" name="usuario" ng-model="vm.peticion.usuario" ng-options="usuario as usuario.nombre for usuario in vm.usuarios track by usuario.nombre" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.usuario.$invalid">
+            <p class="help-block"
+                ng-show="editForm.usuario.$error.required">
+                Campo Obligatorio
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="field_peticionario">Peticionario</label>
+            <select class="form-control" id="field_peticionario" name="peticionario" ng-model="vm.peticion.peticionario" ng-options="peticionario as peticionario.tipo for peticionario in vm.peticionarios track by peticionario.tipo" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.peticionario.$invalid">
+            <p class="help-block"
+                ng-show="editForm.peticionario.$error.required">
+                Campo Obligatorio
+            </p>
+        </div>
+        <div class="form-group">
+>>>>>>> ople_sioe/master
             <label class="control-label" data-translate="opleSioeApp.peticion.nombre_solicitante" for="field_nombre_solicitante">Nombre Solicitante</label>
             <input type="text" class="form-control" name="nombre_solicitante" id="field_nombre_solicitante"
                     ng-model="vm.peticion.nombre_solicitante"
@@ -37,7 +76,11 @@
             <div ng-show="editForm.nombre_solicitante.$invalid">
                 <p class="help-block"
                     ng-show="editForm.nombre_solicitante.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.nombre_solicitante.$error.maxlength">
@@ -53,7 +96,11 @@
             <div ng-show="editForm.paterno_solicitante.$invalid">
                 <p class="help-block"
                     ng-show="editForm.paterno_solicitante.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.paterno_solicitante.$error.maxlength">
@@ -69,7 +116,11 @@
             <div ng-show="editForm.materno_solicitante.$invalid">
                 <p class="help-block"
                     ng-show="editForm.materno_solicitante.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.materno_solicitante.$error.maxlength">
@@ -85,7 +136,11 @@
             <div ng-show="editForm.cargo_solicitante.$invalid">
                 <p class="help-block"
                     ng-show="editForm.cargo_solicitante.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.cargo_solicitante.$error.maxlength">
@@ -101,7 +156,11 @@
             <div ng-show="editForm.direccion_solicitante.$invalid">
                 <p class="help-block"
                     ng-show="editForm.direccion_solicitante.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.direccion_solicitante.$error.maxlength">
@@ -117,7 +176,11 @@
             <div ng-show="editForm.acto_certificar.$invalid">
                 <p class="help-block"
                     ng-show="editForm.acto_certificar.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.acto_certificar.$error.maxlength">
@@ -126,6 +189,7 @@
             </div>
         </div>
         <div class="form-group">
+<<<<<<< HEAD
             <label class="control-label" for="field_oficio">Oficio</label>
             <input type="text" class="form-control" name="oficio" id="field_oficio"
                     ng-model="vm.peticion.oficio"
@@ -138,6 +202,8 @@
             </div>
         </div>
         <div class="form-group">
+=======
+>>>>>>> ople_sioe/master
             <label class="control-label" data-translate="opleSioeApp.peticion.nombre_responsable" for="field_nombre_responsable">Nombre Responsable</label>
             <input type="text" class="form-control" name="nombre_responsable" id="field_nombre_responsable"
                     ng-model="vm.peticion.nombre_responsable"
@@ -145,7 +211,11 @@
             <div ng-show="editForm.nombre_responsable.$invalid">
                 <p class="help-block"
                     ng-show="editForm.nombre_responsable.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
             </div>
         </div>
@@ -161,7 +231,11 @@
             <div ng-show="editForm.fecha.$invalid">
                 <p class="help-block"
                     ng-show="editForm.fecha.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.fecha.$error.ZonedDateTimelocal">
@@ -169,6 +243,7 @@
                 </p>
             </div>
         </div>
+<<<<<<< HEAD
 
         <div class="form-group">
             <label for="field_usuario">Usuario</label>
@@ -193,6 +268,39 @@
                 ng-show="editForm.peticionario.$error.required">
                 This field is required.
             </p>
+=======
+        <div class="form-group" ngf-drop ngf-change="vm.setOficio($file, vm.peticion)">
+            <label class="control-label" for="field_oficio">Oficio</label>
+            <div>
+                <div ng-if="vm.peticion.oficio" class="help-block clearfix">
+                    <a class="pull-left" ng-click="vm.openFile(vm.peticion.oficioContentType, vm.peticion.oficio)">open</a><br>
+                    <span class="pull-left">{{vm.peticion.oficioContentType}}, {{vm.byteSize(vm.peticion.oficio)}}</span>
+                    <button type="button" ng-click="vm.peticion.oficio=null;vm.peticion.oficioContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-primary btn-block"
+                        ngf-change="vm.setOficio($file, vm.peticion)">
+                    PDF <span class="glyphicon glyphicon-floppy-open"></span>
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="oficio" id="field_oficio"
+                    ng-model="vm.peticion.oficio"
+                    required maxbytes="20971520"/>
+            <input type="hidden" class="form-control" name="oficioContentType" id="field_oficioContentType"
+                    ng-model="vm.peticion.oficioContentType" />
+            <div ng-show="editForm.oficio.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.oficio.$error.required">
+                    Obligatorio
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.oficio.$error.maxbytes">
+                    This field cannot be more than 20971520.
+                </p>
+            </div>
+>>>>>>> ople_sioe/master
         </div>
     </div>
     <div class="modal-footer">

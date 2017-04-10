@@ -1,5 +1,6 @@
 
 <div>
+<<<<<<< HEAD
     <h2><span>Peticion</span> {{vm.peticion.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
@@ -8,6 +9,16 @@
         <dd>
             <span>{{vm.peticion.numero}}</span>
         </dd>
+=======
+    <h2><span>Expediente de Peticion</span> {{vm.peticion.numero}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <!--<dt><span>Numero</span></dt>
+        <dd>
+            <span>{{vm.peticion.numero}}</span>
+        </dd>-->
+>>>>>>> ople_sioe/master
         <dt><span data-translate="opleSioeApp.peticion.nombre_solicitante">Nombre Solicitante</span></dt>
         <dd>
             <span>{{vm.peticion.nombre_solicitante}}</span>
@@ -32,10 +43,13 @@
         <dd>
             <span>{{vm.peticion.acto_certificar}}</span>
         </dd>
+<<<<<<< HEAD
         <dt><span>Oficio</span></dt>
         <dd>
             <span>{{vm.peticion.oficio}}</span>
         </dd>
+=======
+>>>>>>> ople_sioe/master
         <dt><span data-translate="opleSioeApp.peticion.nombre_responsable">Nombre Responsable</span></dt>
         <dd>
             <span>{{vm.peticion.nombre_responsable}}</span>
@@ -44,6 +58,7 @@
         <dd>
             <span>{{vm.peticion.fecha | date:'medium'}}</span>
         </dd>
+<<<<<<< HEAD
         <dt><span>Usuario</span></dt>
         <dd>
             <a ui-sref="usuario-detail({id:vm.peticion.usuario.id})">{{vm.peticion.usuario.id}}</a>
@@ -54,6 +69,32 @@
         </dd>
     </dl>
 
+=======
+        <dt><span>Oficio</span></dt>
+        <dd>
+            <div ng-if="vm.peticion.oficio">
+                <button type="button" ng-click="vm.openFile(vm.peticion.oficioContentType, vm.peticion.oficio)" class="glyphicon glyphicon-save-file
+"></button>
+            </div>
+        </dd>
+        <dt><span>Autoridad</span></dt>
+        <dd>
+            <p>{{vm.peticion.usuario.nombre}}</p>
+        </dd>
+        <dt><span>Peticionario</span></dt>
+        <dd>
+            <p>{{vm.peticion.peticionario.tipo}}</p>
+        </dd>
+        <dt><span>Estatus</span></dt>
+        <dd>
+            <a ui-sref="peticionario-detail({id:vm.peticion.peticionario.id})">campo estatus</a>
+        </dd>
+        <dt><span>Acta</span></dt>
+        <dd>
+            <a ui-sref="peticionario-detail({id:vm.peticion.peticionario.id})">campo acta</a>
+        </dd>
+    </dl>
+>>>>>>> ople_sioe/master
     <button type="submit"
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">

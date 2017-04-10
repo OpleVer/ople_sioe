@@ -4,6 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
+<<<<<<< HEAD
         <h4 class="modal-title" id="myAnexoLabel">Create or edit a Anexo</h4>
     </div>
     <div class="modal-body">
@@ -16,12 +17,30 @@
         <div class="form-group">
             <label class="control-label" for="field_archivo">Archivo</label>
             <input type="text" class="form-control" name="archivo" id="field_archivo"
+=======
+        <h4 class="modal-title" id="myAnexoLabel">Anexo</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <!--<div class="form-group" ng-show="vm.anexo.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.anexo.id" readonly />
+        </div> -->
+        <div class="form-group">
+            <label class="control-label" for="field_archivo">Archivo</label>
+            <input type="txt" class="form-control" name="archivo" id="field_archivo"
+>>>>>>> ople_sioe/master
                     ng-model="vm.anexo.archivo"
                     required/>
             <div ng-show="editForm.archivo.$invalid">
                 <p class="help-block"
                     ng-show="editForm.archivo.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
             </div>
         </div>
@@ -33,7 +52,11 @@
             <div ng-show="editForm.descripcion.$invalid">
                 <p class="help-block"
                     ng-show="editForm.descripcion.$error.required">
+<<<<<<< HEAD
                     This field is required.
+=======
+                    Campo Obligatorio
+>>>>>>> ople_sioe/master
                 </p>
                 <p class="help-block"
                     ng-show="editForm.descripcion.$error.maxlength">

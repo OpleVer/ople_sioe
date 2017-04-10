@@ -122,9 +122,16 @@
                                 cargo_solicitante: null,
                                 direccion_solicitante: null,
                                 acto_certificar: null,
+<<<<<<< HEAD
                                 oficio: null,
                                 nombre_responsable: null,
                                 fecha: null,
+=======
+                                nombre_responsable: null,
+                                fecha: null,
+                                oficio: null,
+                                oficioContentType: null,
+>>>>>>> ople_sioe/master
                                 id: null
                             };
                         }

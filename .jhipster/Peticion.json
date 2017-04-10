@@ -105,6 +105,7 @@
             "fieldValidateRulesMaxlength": "2000"
         },
         {
+<<<<<<< HEAD
             "fieldName": "oficio",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -112,6 +113,8 @@
             ]
         },
         {
+=======
+>>>>>>> ople_sioe/master
             "fieldName": "nombre_responsable",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -124,6 +127,19 @@
             "fieldValidateRules": [
                 "required"
             ]
+<<<<<<< HEAD
+=======
+        },
+        {
+            "fieldName": "oficio",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "required",
+                "maxbytes"
+            ],
+            "fieldValidateRulesMaxbytes": "20971520"
+>>>>>>> ople_sioe/master
         }
     ],
     "changelogDate": "20170331193312",

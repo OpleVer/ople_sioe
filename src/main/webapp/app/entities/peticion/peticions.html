@@ -1,5 +1,9 @@
 <div>
+<<<<<<< HEAD
     <h2>Peticions</h2>
+=======
+    <h2>Bitacora de Peticiones</h2>
+>>>>>>> ople_sioe/master
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -7,7 +11,11 @@
                 <button class="btn btn-primary" ui-sref="peticion.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span >
+<<<<<<< HEAD
                         Create new Peticion
+=======
+                        Capturar Solicitud
+>>>>>>> ople_sioe/master
                     </span>
                 </button>
             </div>
@@ -18,6 +26,7 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+<<<<<<< HEAD
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="numero"><span>Numero</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="nombre_solicitante"><span data-translate="opleSioeApp.peticion.nombre_solicitante">Nombre Solicitante</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -31,11 +40,30 @@
                     <th jh-sort-by="fecha"><span>Fecha</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="usuario.id"><span>Usuario</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="peticionario.id"><span>Peticionario</span> <span class="glyphicon glyphicon-sort"></span></th>
+=======
+                    <!--<th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="numero"><span>Numero Peticion</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fecha"><span>Fecha</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="peticionario.id"><span>Peticionario</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="nombre_solicitante"><span data-translate="opleSioeApp.peticion.nombre_solicitante">Nombre Solicitante</span> <span class="glyphicon glyphicon-sort"></span></th>
+                  <th jh-sort-by="paterno_solicitante"><span data-translate="opleSioeApp.peticion.paterno_solicitante">Paterno Solicitante</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="materno_solicitante"><span data-translate="opleSioeApp.peticion.materno_solicitante">Materno Solicitante</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cargo_solicitante"><span data-translate="opleSioeApp.peticion.cargo_solicitante">Cargo Solicitante</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="direccion_solicitante"><span data-translate="opleSioeApp.peticion.direccion_solicitante">Direccion Solicitante</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="acto_certificar"><span data-translate="opleSioeApp.peticion.acto_certificar">Acto a Certificar</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="nombre_responsable"><span data-translate="opleSioeApp.peticion.nombre_responsable">Responsable</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="oficio"><span>Oficio</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="usuario.id"><span>Autoridad</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by=""><span>Estatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by=""><span>Acta</span> <span class="glyphicon glyphicon-sort"></span></th>
+
+>>>>>>> ople_sioe/master
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="peticion in vm.peticions track by peticion.id">
+<<<<<<< HEAD
                     <td><a ui-sref="peticion-detail({id:peticion.id})">{{peticion.id}}</a></td>
                     <td>{{peticion.numero}}</td>
                     <td>{{peticion.nombre_solicitante}}</td>
@@ -53,6 +81,30 @@
                     <td>
                         <a ui-sref="peticionario-detail({id:peticion.peticionario.id})">{{peticion.peticionario.id}}</a>
                     </td>
+=======
+                  <!--  <td><a ui-sref="peticion-detail({id:peticion.id})">{{peticion.id}}</a></td>-->
+                    <td>{{peticion.numero}}</td>
+                    <td>{{peticion.fecha | date:'short'}}</td>
+                    <td>
+                        <p ui-sref="peticionario-detail({id:peticion.peticionario.tipo})">{{peticion.peticionario.tipo}}</p>
+                    </td>
+                    <!--<td>{{peticion.nombre_solicitante}} {{peticion.paterno_solicitante}}</td>
+                    <td>{{peticion.paterno_solicitante}}</td>
+                    <td>{{peticion.materno_solicitante}}</td>
+                    <td>{{peticion.cargo_solicitante}}</td>
+                    <td>{{peticion.direccion_solicitante}}</td>-->
+                    <td>{{peticion.acto_certificar}}</td>
+                    <!--<td>{{peticion.nombre_responsable}}</td>
+                    <td>
+                        <a ng-if="peticion.oficio" ng-click="vm.openFile(peticion.oficioContentType, peticion.oficio)">open</a>
+                        <span ng-if="peticion.oficio">{{peticion.oficioContentType}}, {{vm.byteSize(peticion.oficio)}}</span>
+                    </td>-->
+                    <td>
+                        <p ui-sref="usuario-detail({id:peticion.usuario.nombre})">{{peticion.usuario.nombre}}</p>
+                    </td>
+                    <td>campo estatus</td>
+                    <td>campo acta</td>
+>>>>>>> ople_sioe/master
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
