@@ -1,20 +1,23 @@
+
 <div>
-    <h2><span>Expediente de Solicitud:</span> {{vm.peticion.numero}}</h2>
+    <h2><span>Expediente de Peticion</span> {{vm.peticion.numero}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
         <!--<dt><span>Numero</span></dt>
         <dd>
-            <span>{{vm.peticion.id}}</span>
+            <span>{{vm.peticion.numero}}</span>
         </dd>-->
-        <dt><span>Peticionario</span></dt>
-        <dd>
-            <p>{{vm.peticion.peticionario.tipo}}</p>
-        </dd>
         <dt><span data-translate="opleSioeApp.peticion.nombre_solicitante">Nombre Solicitante</span></dt>
         <dd>
             <span>{{vm.peticion.nombre_solicitante}}</span>
+        </dd>
+        <dt><span data-translate="opleSioeApp.peticion.paterno_solicitante">Paterno Solicitante</span></dt>
+        <dd>
             <span>{{vm.peticion.paterno_solicitante}}</span>
+        </dd>
+        <dt><span data-translate="opleSioeApp.peticion.materno_solicitante">Materno Solicitante</span></dt>
+        <dd>
             <span>{{vm.peticion.materno_solicitante}}</span>
         </dd>
         <dt><span data-translate="opleSioeApp.peticion.cargo_solicitante">Cargo Solicitante</span></dt>
@@ -29,14 +32,6 @@
         <dd>
             <span>{{vm.peticion.acto_certificar}}</span>
         </dd>
-        <dt><span>Oficio</span></dt>
-        <dd>
-            <span>{{vm.peticion.oficio}}</span>
-        </dd>
-        <dt><span>Origen</span></dt>
-        <dd>
-            <p>{{vm.peticion.usuario.nombre}}</p>
-        </dd>
         <dt><span data-translate="opleSioeApp.peticion.nombre_responsable">Nombre Responsable</span></dt>
         <dd>
             <span>{{vm.peticion.nombre_responsable}}</span>
@@ -45,36 +40,38 @@
         <dd>
             <span>{{vm.peticion.fecha | date:'medium'}}</span>
         </dd>
+        <dt><span>Oficio</span></dt>
+        <dd>
+            <div ng-if="vm.peticion.oficio">
+                <button type="button" ng-click="vm.openFile(vm.peticion.oficioContentType, vm.peticion.oficio)" class="glyphicon glyphicon-save-file
+"></button>
+            </div>
+        </dd>
+        <dt><span>Autoridad</span></dt>
+        <dd>
+            <p>{{vm.peticion.usuario.nombre}}</p>
+        </dd>
+        <dt><span>Peticionario</span></dt>
+        <dd>
+            <p>{{vm.peticion.peticionario.tipo}}</p>
+        </dd>
+        <dt><span>Estatus</span></dt>
+        <dd>
+            <a ui-sref="peticionario-detail({id:vm.peticion.peticionario.id})">campo estatus</a>
+        </dd>
+        <dt><span>Acta</span></dt>
+        <dd>
+            <a ui-sref="peticionario-detail({id:vm.peticion.peticionario.id})">campo acta</a>
+        </dd>
     </dl>
-
-    <button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Regresar</span>
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
 
-    <!--  <button type="button" ui-sref="peticion-detail.edit({id:vm.peticion.id})" class="btn btn-primary">
+    <button type="button" ui-sref="peticion-detail.edit({id:vm.peticion.id})" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down"> Edit</span>
-    </button>-->
-    <button class="btn btn-primary" ui-sref="anexo.new">
-        <span class="glyphicon glyphicon-paperclip"></span>
-        <span >
-            Agregar Anexo
-        </span>
-    </button>
-    <button type="submit" ui-sref="anexo.edit({id:peticion.id})" class="btn btn-primary btn-sm">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-sm-down"></span>
-    </button>
-    <button class="btn btn-warning" ui-sref="prevencion.new">
-        <span class="glyphicon glyphicon-alert"></span>
-        <span >
-            Asignar Prevencion
-        </span>
-    </button>
-    <button class="btn btn-success" ui-sref="evaluacion.new">
-        <span class="glyphicon glyphicon-flag"></span>
-        <span >
-            Evaluar
-        </span>
     </button>
 </div>

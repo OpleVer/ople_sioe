@@ -5,15 +5,17 @@
         .module('opleSioeApp')
         .controller('PeticionDialogController', PeticionDialogController);
 
-    PeticionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Peticion', 'Usuario', 'Peticionario', 'Anexo', 'Prevencion', 'Evaluacion'];
+    PeticionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Peticion', 'Usuario', 'Peticionario', 'Anexo', 'Prevencion', 'Evaluacion'];
 
-    function PeticionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Peticion, Usuario, Peticionario, Anexo, Prevencion, Evaluacion) {
+    function PeticionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Peticion, Usuario, Peticionario, Anexo, Prevencion, Evaluacion) {
         var vm = this;
 
         vm.peticion = entity;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
+        vm.byteSize = DataUtils.byteSize;
+        vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.usuarios = Usuario.query();
         vm.peticionarios = Peticionario.query();
@@ -49,6 +51,17 @@
         }
 
         vm.datePickerOpenStatus.fecha = false;
+
+        vm.setOficio = function ($file, peticion) {
+            if ($file) {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
+                        peticion.oficio = base64Data;
+                        peticion.oficioContentType = $file.type;
+                    });
+                });
+            }
+        };
 
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;

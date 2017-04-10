@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
@@ -66,14 +67,16 @@ public class PeticionResourceIntTest {
     private static final String DEFAULT_ACTO_CERTIFICAR = "AAAAAAAAAA";
     private static final String UPDATED_ACTO_CERTIFICAR = "BBBBBBBBBB";
 
-    private static final String DEFAULT_OFICIO = "AAAAAAAAAA";
-    private static final String UPDATED_OFICIO = "BBBBBBBBBB";
-
     private static final String DEFAULT_NOMBRE_RESPONSABLE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE_RESPONSABLE = "BBBBBBBBBB";
 
     private static final ZonedDateTime DEFAULT_FECHA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_FECHA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
+    private static final byte[] DEFAULT_OFICIO = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_OFICIO = TestUtil.createByteArray(20971520, "1");
+    private static final String DEFAULT_OFICIO_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_OFICIO_CONTENT_TYPE = "image/png";
 
     @Autowired
     private PeticionRepository peticionRepository;
@@ -122,9 +125,10 @@ public class PeticionResourceIntTest {
             .cargo_solicitante(DEFAULT_CARGO_SOLICITANTE)
             .direccion_solicitante(DEFAULT_DIRECCION_SOLICITANTE)
             .acto_certificar(DEFAULT_ACTO_CERTIFICAR)
-            .oficio(DEFAULT_OFICIO)
             .nombre_responsable(DEFAULT_NOMBRE_RESPONSABLE)
-            .fecha(DEFAULT_FECHA);
+            .fecha(DEFAULT_FECHA)
+            .oficio(DEFAULT_OFICIO)
+            .oficioContentType(DEFAULT_OFICIO_CONTENT_TYPE);
         // Add required entity
         Usuario usuario = UsuarioResourceIntTest.createEntity(em);
         em.persist(usuario);
@@ -165,9 +169,10 @@ public class PeticionResourceIntTest {
         assertThat(testPeticion.getCargo_solicitante()).isEqualTo(DEFAULT_CARGO_SOLICITANTE);
         assertThat(testPeticion.getDireccion_solicitante()).isEqualTo(DEFAULT_DIRECCION_SOLICITANTE);
         assertThat(testPeticion.getActo_certificar()).isEqualTo(DEFAULT_ACTO_CERTIFICAR);
-        assertThat(testPeticion.getOficio()).isEqualTo(DEFAULT_OFICIO);
         assertThat(testPeticion.getNombre_responsable()).isEqualTo(DEFAULT_NOMBRE_RESPONSABLE);
         assertThat(testPeticion.getFecha()).isEqualTo(DEFAULT_FECHA);
+        assertThat(testPeticion.getOficio()).isEqualTo(DEFAULT_OFICIO);
+        assertThat(testPeticion.getOficioContentType()).isEqualTo(DEFAULT_OFICIO_CONTENT_TYPE);
     }
 
     @Test
@@ -317,24 +322,6 @@ public class PeticionResourceIntTest {
 
     @Test
     @Transactional
-    public void checkOficioIsRequired() throws Exception {
-        int databaseSizeBeforeTest = peticionRepository.findAll().size();
-        // set the field null
-        peticion.setOficio(null);
-
-        // Create the Peticion, which fails.
-
-        restPeticionMockMvc.perform(post("/api/peticions")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(peticion)))
-            .andExpect(status().isBadRequest());
-
-        List<Peticion> peticionList = peticionRepository.findAll();
-        assertThat(peticionList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkNombre_responsableIsRequired() throws Exception {
         int databaseSizeBeforeTest = peticionRepository.findAll().size();
         // set the field null
@@ -371,6 +358,24 @@ public class PeticionResourceIntTest {
 
     @Test
     @Transactional
+    public void checkOficioIsRequired() throws Exception {
+        int databaseSizeBeforeTest = peticionRepository.findAll().size();
+        // set the field null
+        peticion.setOficio(null);
+
+        // Create the Peticion, which fails.
+
+        restPeticionMockMvc.perform(post("/api/peticions")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(peticion)))
+            .andExpect(status().isBadRequest());
+
+        List<Peticion> peticionList = peticionRepository.findAll();
+        assertThat(peticionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPeticions() throws Exception {
         // Initialize the database
         peticionRepository.saveAndFlush(peticion);
@@ -387,9 +392,10 @@ public class PeticionResourceIntTest {
             .andExpect(jsonPath("$.[*].cargo_solicitante").value(hasItem(DEFAULT_CARGO_SOLICITANTE.toString())))
             .andExpect(jsonPath("$.[*].direccion_solicitante").value(hasItem(DEFAULT_DIRECCION_SOLICITANTE.toString())))
             .andExpect(jsonPath("$.[*].acto_certificar").value(hasItem(DEFAULT_ACTO_CERTIFICAR.toString())))
-            .andExpect(jsonPath("$.[*].oficio").value(hasItem(DEFAULT_OFICIO.toString())))
             .andExpect(jsonPath("$.[*].nombre_responsable").value(hasItem(DEFAULT_NOMBRE_RESPONSABLE.toString())))
-            .andExpect(jsonPath("$.[*].fecha").value(hasItem(sameInstant(DEFAULT_FECHA))));
+            .andExpect(jsonPath("$.[*].fecha").value(hasItem(sameInstant(DEFAULT_FECHA))))
+            .andExpect(jsonPath("$.[*].oficioContentType").value(hasItem(DEFAULT_OFICIO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].oficio").value(hasItem(Base64Utils.encodeToString(DEFAULT_OFICIO))));
     }
 
     @Test
@@ -410,9 +416,10 @@ public class PeticionResourceIntTest {
             .andExpect(jsonPath("$.cargo_solicitante").value(DEFAULT_CARGO_SOLICITANTE.toString()))
             .andExpect(jsonPath("$.direccion_solicitante").value(DEFAULT_DIRECCION_SOLICITANTE.toString()))
             .andExpect(jsonPath("$.acto_certificar").value(DEFAULT_ACTO_CERTIFICAR.toString()))
-            .andExpect(jsonPath("$.oficio").value(DEFAULT_OFICIO.toString()))
             .andExpect(jsonPath("$.nombre_responsable").value(DEFAULT_NOMBRE_RESPONSABLE.toString()))
-            .andExpect(jsonPath("$.fecha").value(sameInstant(DEFAULT_FECHA)));
+            .andExpect(jsonPath("$.fecha").value(sameInstant(DEFAULT_FECHA)))
+            .andExpect(jsonPath("$.oficioContentType").value(DEFAULT_OFICIO_CONTENT_TYPE))
+            .andExpect(jsonPath("$.oficio").value(Base64Utils.encodeToString(DEFAULT_OFICIO)));
     }
 
     @Test
@@ -441,9 +448,10 @@ public class PeticionResourceIntTest {
             .cargo_solicitante(UPDATED_CARGO_SOLICITANTE)
             .direccion_solicitante(UPDATED_DIRECCION_SOLICITANTE)
             .acto_certificar(UPDATED_ACTO_CERTIFICAR)
-            .oficio(UPDATED_OFICIO)
             .nombre_responsable(UPDATED_NOMBRE_RESPONSABLE)
-            .fecha(UPDATED_FECHA);
+            .fecha(UPDATED_FECHA)
+            .oficio(UPDATED_OFICIO)
+            .oficioContentType(UPDATED_OFICIO_CONTENT_TYPE);
 
         restPeticionMockMvc.perform(put("/api/peticions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -461,9 +469,10 @@ public class PeticionResourceIntTest {
         assertThat(testPeticion.getCargo_solicitante()).isEqualTo(UPDATED_CARGO_SOLICITANTE);
         assertThat(testPeticion.getDireccion_solicitante()).isEqualTo(UPDATED_DIRECCION_SOLICITANTE);
         assertThat(testPeticion.getActo_certificar()).isEqualTo(UPDATED_ACTO_CERTIFICAR);
-        assertThat(testPeticion.getOficio()).isEqualTo(UPDATED_OFICIO);
         assertThat(testPeticion.getNombre_responsable()).isEqualTo(UPDATED_NOMBRE_RESPONSABLE);
         assertThat(testPeticion.getFecha()).isEqualTo(UPDATED_FECHA);
+        assertThat(testPeticion.getOficio()).isEqualTo(UPDATED_OFICIO);
+        assertThat(testPeticion.getOficioContentType()).isEqualTo(UPDATED_OFICIO_CONTENT_TYPE);
     }
 
     @Test

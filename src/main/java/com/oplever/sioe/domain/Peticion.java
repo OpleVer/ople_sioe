@@ -62,16 +62,21 @@ public class Peticion implements Serializable {
     private String acto_certificar;
 
     @NotNull
-    @Column(name = "oficio", nullable = false)
-    private String oficio;
-
-    @NotNull
     @Column(name = "nombre_responsable", nullable = false)
     private String nombre_responsable;
 
     @NotNull
     @Column(name = "fecha", nullable = false)
     private ZonedDateTime fecha;
+
+    @NotNull
+    @Size(max = 20971520)
+    @Lob
+    @Column(name = "oficio", nullable = false)
+    private byte[] oficio;
+
+    @Column(name = "oficio_content_type", nullable = false)
+    private String oficioContentType;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -193,19 +198,6 @@ public class Peticion implements Serializable {
         this.acto_certificar = acto_certificar;
     }
 
-    public String getOficio() {
-        return oficio;
-    }
-
-    public Peticion oficio(String oficio) {
-        this.oficio = oficio;
-        return this;
-    }
-
-    public void setOficio(String oficio) {
-        this.oficio = oficio;
-    }
-
     public String getNombre_responsable() {
         return nombre_responsable;
     }
@@ -230,6 +222,32 @@ public class Peticion implements Serializable {
 
     public void setFecha(ZonedDateTime fecha) {
         this.fecha = fecha;
+    }
+
+    public byte[] getOficio() {
+        return oficio;
+    }
+
+    public Peticion oficio(byte[] oficio) {
+        this.oficio = oficio;
+        return this;
+    }
+
+    public void setOficio(byte[] oficio) {
+        this.oficio = oficio;
+    }
+
+    public String getOficioContentType() {
+        return oficioContentType;
+    }
+
+    public Peticion oficioContentType(String oficioContentType) {
+        this.oficioContentType = oficioContentType;
+        return this;
+    }
+
+    public void setOficioContentType(String oficioContentType) {
+        this.oficioContentType = oficioContentType;
     }
 
     public Usuario getUsuario() {
@@ -340,9 +358,10 @@ public class Peticion implements Serializable {
             ", cargo_solicitante='" + cargo_solicitante + "'" +
             ", direccion_solicitante='" + direccion_solicitante + "'" +
             ", acto_certificar='" + acto_certificar + "'" +
-            ", oficio='" + oficio + "'" +
             ", nombre_responsable='" + nombre_responsable + "'" +
             ", fecha='" + fecha + "'" +
+            ", oficio='" + oficio + "'" +
+            ", oficioContentType='" + oficioContentType + "'" +
             '}';
     }
 }

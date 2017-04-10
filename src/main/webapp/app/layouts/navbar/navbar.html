@@ -7,8 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/logo-jhipster.png" alt="logo" />
+            <a class="navbar-brand" href="#/" ng-click="vm.collapseNavbar()">
                 <span>SIOE</span> <span class="navbar-version">{{VERSION}}</span>
             </a>
         </div>
@@ -114,6 +113,12 @@
                                 <span>Presentacion</span>
                             </a>
                         </li>
+                        <li ui-sref-active="active">
+                                <a ui-sref="peticion" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span >Peticion</span>
+                                </a>
+                            </li>
                         <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                     </ul>
                 </li>

@@ -5,9 +5,9 @@
         .module('opleSioeApp')
         .controller('PeticionController', PeticionController);
 
-    PeticionController.$inject = ['$state', 'Peticion', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    PeticionController.$inject = ['$state', 'DataUtils', 'Peticion', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function PeticionController($state, Peticion, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function PeticionController($state, DataUtils, Peticion, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -16,6 +16,8 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.openFile = DataUtils.openFile;
+        vm.byteSize = DataUtils.byteSize;
 
         loadAll();
 

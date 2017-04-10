@@ -50,15 +50,18 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="oficio" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
             <column name="nombre_responsable" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
 
             <column name="fecha" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="oficio" type="longblob">
+                <constraints nullable="false" />
+            </column>
+            <column name="oficio_content_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
 
